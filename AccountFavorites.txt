@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 asdf	Valorant	League of Legends	Counter-Strike: Global Offensive	Minecraft	
+=======
+null	Valorant	League of Legends	
+asdf	Valorant	League of Legends	
+>>>>>>> 1d11cb45f430d61dce81ba8779efa9b6baa6775a
