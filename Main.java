@@ -33,6 +33,7 @@ public class Main {
 		
 		
 		try {
+			games.clear();
 			file = new File("VideoGameList.txt");
 			input = new Scanner(file);
 			while(input.hasNext()) {
@@ -72,23 +73,27 @@ public class Main {
 	
 		
 		try {
+			favorites.clear();
 			file = new File("AccountFavorites.txt");
 		
 			input = new Scanner(file);
 			while(input.hasNext()) {
 				inputLine = input.nextLine();
 				properties = inputLine.split("\t");
-				//Temp placeholder
-				if(properties[0].equals("asdf")) {
+				
+				if(properties[0].equals(AddToFavorite.loggedInAccount)) {
 					for(int i = 1; i < properties.length;i++) {
 						gameTitles.add(properties[i]);
 					}
 				}
 			}
 			for (int i = 0; i < gameTitles.size(); i++) {
-				if(gameTitles.get(i).equals(games.get(i).getName())) {
-					favorites.add(games.get(i));
+				for(int k = 0; k < games.size(); k ++) {
+					if(gameTitles.get(i).equals(games.get(k).getName())) {
+						favorites.add(games.get(k));
+					}
 				}
+				
 			}
 			
 			

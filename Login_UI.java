@@ -48,6 +48,7 @@ public class Login_UI {
 				
 				if (e.getSource().equals(loginButton)) {
 				if(Log_In.Login(AccountText.getText(), passwordText.getText())) {
+					//AddToFavorite.currentAccount(AccountText.getText());
 					JFrame f1 = new JFrame("Success!");
 					f1.setSize(500, 100);
 					f1.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -67,7 +68,7 @@ public class Login_UI {
 			        	}
 			        }, 2000);
 			        Log_In.logged(AccountText.getText());
-			        AddToFavorite.currentAccount(AccountText.getText());
+			       
 				}
 				else {
 					JFrame f2 = new JFrame("Failed!");

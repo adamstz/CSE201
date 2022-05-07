@@ -25,7 +25,7 @@ public class AddToFavorite {
 	public static String loggedInAccount;
 	
 	public static void FavoriteButton(JFrame jf, JPanel panel) {
-		Main.parseFavoriteGames(UI.favorites);
+		
 		jf.getContentPane().add(panel, BorderLayout.NORTH);
 		JButton fv = new JButton("Add to favorite");
 		fv.setSize(60,20);
@@ -33,6 +33,7 @@ public class AddToFavorite {
 		jf.getContentPane().add(panel, BorderLayout.NORTH);
 		fv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+					Main.parseFavoriteGames(UI.favorites);
 					ArrayList<String> favGames = new ArrayList<>();
 					userFavorites = getAccountFavorites();
 					if(userFavorites.get(loggedInAccount) != null) {
@@ -42,7 +43,7 @@ public class AddToFavorite {
 					}
 				
 				for (int i = 1 ; i < ViewGames.columnNames.length; i++) {
-					if(Boolean.valueOf(ViewGames.table.getValueAt(4, i).toString()) == true) {
+					if(Boolean.valueOf(ViewGames.model.getValueAt(4, i).toString()) == true) {
 						if(!favGames.contains(ViewGames.table.getColumnName(i))) {
 						favGames.add(ViewGames.table.getColumnName(i));
 						}
@@ -61,6 +62,7 @@ public class AddToFavorite {
 	}
 	public static void currentAccount(String account) {
 		loggedInAccount = account;
+		Main.parseFavoriteGames(UI.favorites);
 	}
 	public static Map<String, String[]> getAccountFavorites() {
 		File file = new File("AccountFavorites.txt");

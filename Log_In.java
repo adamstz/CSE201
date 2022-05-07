@@ -127,6 +127,7 @@ public class Log_In {
 	}
 
 	public static void logged(String account) {
+		AddToFavorite.currentAccount(account);
 		logged(account, UI.jf);
 	}
 

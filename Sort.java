@@ -39,10 +39,6 @@ public class Sort {
 		panel.add(jButton);
 		jf.getContentPane().add(panel, BorderLayout.NORTH);
 		
-		Main.parseVideoGames(sortedGamesPriceAs);
-		Main.parseVideoGames(sortedGamesPriceDe);
-		Main.parseVideoGames(sortedGamesAlpha);
-		Main.parseVideoGames(sortedGamesDev);
 		Main.parseVideoGames(games);
 		
 		jButton.addActionListener(new ActionListener() {
@@ -61,7 +57,7 @@ public class Sort {
 					sortDeveloper();
 				} else {
 					
-					sortTable(games,UI.jf);
+					sortTable(FilterDropDown.filteredGames,UI.jf);
 					
 				}
 			}
@@ -69,6 +65,7 @@ public class Sort {
 	}
 
 	public static void sortPriceAscend() {
+		Main.parseVideoGames(sortedGamesPriceAs);
 		if(Filter.filtered == true) {
 			FilterDropDown.filteredGames.sort((o1, o2)
 	                -> o1.compareTo(o2));
@@ -81,18 +78,21 @@ public class Sort {
 	}
 
 	public static void sortPriceDescend() {
+		Main.parseVideoGames(sortedGamesPriceDe);
 		if(Filter.filtered == true) {
 			FilterDropDown.filteredGames.sort((o1, o2)
-	                -> o2.compareTo(o1));
+	                -> o1.compareTo(o2));
 			sortTable(FilterDropDown.filteredGames,UI.jf);
 		} else {
 			sortedGamesPriceDe.sort((o1, o2)
 					-> o2.compareTo(o1));
 			sortTable(sortedGamesPriceDe,UI.jf);
 		}
+		
 	}
 
 	public static void sortAlphabet() {
+		Main.parseVideoGames(sortedGamesAlpha);
 		if(Filter.filtered == true) {
 			FilterDropDown.filteredGames.sort((o1, o2)
 	                -> o1.getName().compareTo(
@@ -107,16 +107,18 @@ public class Sort {
 	}
 	
 	public static void sortDeveloper() {
+		Main.parseVideoGames(sortedGamesDev);
 		if(Filter.filtered == true) {
 			FilterDropDown.filteredGames.sort((o1, o2)
-					-> o1.getDeveloper().compareTo(
+	                -> o1.getDeveloper().compareTo(
 							o2.getDeveloper()));
 			sortTable(FilterDropDown.filteredGames,UI.jf);
-		}
+		} else {
 		sortedGamesDev.sort((o1, o2)
 				-> o1.getDeveloper().compareTo(
 						o2.getDeveloper()));
 		sortTable(sortedGamesDev,UI.jf);
+		}
 	}
 
 	public static void sortTable(ArrayList<VideoGame> games, JFrame jf) {
@@ -136,5 +138,6 @@ public class Sort {
 		}
 		ViewGames.model.fireTableDataChanged();
 		ViewGames.table.getTableHeader().repaint();
+		jf.repaint();
 	}
 }

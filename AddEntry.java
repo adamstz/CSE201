@@ -133,7 +133,7 @@ public class AddEntry {
 		}
 		
 		public static void refresh(JFrame jf) {
-			FilterDropDown.unfilter(jf);
+			FilterDropDown.unfilterTable(jf);
 			
 		}
 			

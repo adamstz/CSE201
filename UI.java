@@ -14,10 +14,11 @@ public class UI {
 
 		
 		jf.setLayout(new BorderLayout());
-		jf.setSize(1400,600);
+		jf.setSize(1800,600);
 
 		jf.setResizable(false);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		ViewGames.viewGames(jf, games);
 		JPanel northPanel = new JPanel();
 		Log_In.CreateLogInButton(jf, northPanel);
@@ -26,9 +27,9 @@ public class UI {
 		CreateAccount.createAccountButton(jf, northPanel);
 		Sort.createSortMenu(jf,northPanel);
 		FilterDropDown.createFilterButton(jf, northPanel);
-    AddEntry.createButton(jf, northPanel);
-
+		AddEntry.createButton(jf, northPanel);
 		AddToFavorite.FavoriteButton(jf, northPanel);
+		
 		
 
 		//JPanel southPanel = new JPanel();
@@ -36,13 +37,14 @@ public class UI {
 		jf.setVisible(true);
 	}
 	public static void fullCatalog() {
+		Main.parseVideoGames(games);
 		ViewGames.viewGames(jf, games);
 		
 	}
 	public static void favCatalog() {
-		
+		Main.parseFavoriteGames(favorites);
 		ViewFavorites.viewFavorites(jf, favorites);
-
+		
 		
 	}
 

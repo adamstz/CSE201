@@ -68,9 +68,8 @@ public class ViewGames {
                 }
             }
         };
+        
 		scrollPane = new JScrollPane(table);
-		
-		
 		table.setAutoResizeMode( JTable.AUTO_RESIZE_OFF);
 		table.setFillsViewportHeight(true);	
 		TableColumn column = null;

@@ -23,19 +23,21 @@ public class Filter {
 
 		
 	games.removeIf(s -> !(s.getPrice() <= high && s.getPrice() >= low));
-	
+	filtered = true;
 	return games;
 		
 	}
 	
 	public static ArrayList<VideoGame> filterByDev (String dev, ArrayList<VideoGame> games) {
 		games.removeIf(s -> !(s.getDeveloper().contains(dev)));
+		filtered = true;
 		return games;
 	}
 	
 	
 	public static ArrayList<VideoGame> filterByPlatform(String platform, ArrayList<VideoGame> games) {
 		games.removeIf(s -> !(Arrays.toString(s.getPlatforms()).contains(platform)));
+		filtered = true;
 		return games;
 		
 	}
