@@ -1,54 +1,52 @@
-public class VideoGame implements Comparable{ 
-	//=========================== Properties
+public class VideoGame implements Comparable {
+	// =========================== Properties
 	private String name, developer, description;
 	private String[] platforms;
 	private double price;
+
+	// =========================== Constructors
 	
-	//=========================== Constructors
-	public VideoGame() {
-		
-	}
-	
-	public VideoGame(String name, String description ,String[] platforms, String developer, double price) {
+	public VideoGame(String name, String description, String[] platforms, String developer, double price) {
 		this.name = name;
 		this.description = description;
 		this.developer = developer;
 		this.platforms = platforms;
 		this.price = price;
 	}
-	
-	//=========================== Methods
+
+	// =========================== Methods
 	@Override
 	public int compareTo(Object o) {
-		int comparePrice = (int)((VideoGame) o).getPrice();
-		return (int)this.getPrice() - comparePrice;
+		int comparePrice = (int) ((VideoGame) o).getPrice();
+		return (int) this.getPrice() - comparePrice;
 	}
+
 	public String toString() {
 		String platformsFormatted = "";
-		for(int i = 0; i < platforms.length; i++) {
-			if(i == platforms.length-1) {
+		for (int i = 0; i < platforms.length; i++) {
+			if (i == platforms.length - 1) {
 				platformsFormatted += platforms[i];
-			}
-			else {
+			} else {
 				platformsFormatted += platforms[i] + "/";
 			}
 		}
-		return "Name: " + name + " Description: " + description + " Platforms: " + platformsFormatted + " Developer: " + 
-				developer + " Price: " + price;
+		return "Name: " + name + " Description: " + description + " Platforms: " + platformsFormatted + " Developer: "
+				+ developer + " Price: " + price;
 	}
+
 	public String getPlatformString() {
 		String platformsFormatted = "";
-		for(int i = 0; i < platforms.length; i++) {
-			if(i == platforms.length-1) {
+		for (int i = 0; i < platforms.length; i++) {
+			if (i == platforms.length - 1) {
 				platformsFormatted += platforms[i];
-			}
-			else {
+			} else {
 				platformsFormatted += platforms[i] + "/";
 			}
 		}
 		return platformsFormatted;
-	
+
 	}
+	// =================================== Getters and Setters
 	public String getName() {
 		return name;
 	}
@@ -88,5 +86,5 @@ public class VideoGame implements Comparable{
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
+
 }

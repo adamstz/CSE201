@@ -1,9 +1,5 @@
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.ScrollPane;
 import java.util.ArrayList;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,8 +8,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
-import javax.swing.JCheckBox;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
@@ -25,8 +19,11 @@ public class ViewGames {
 	JPanel centerPanel;
 	static JTable table;
 	static DefaultTableModel model;
+	
 	/**
-	 * @wbp.parser.entryPoint
+	 * Creates table to view games catalog
+	 * @param jf
+	 * @param games
 	 */
 	public static void viewGames(JFrame jf, ArrayList<VideoGame> games) {
 				
@@ -89,7 +86,11 @@ public class ViewGames {
 		ViewGames.table.getTableHeader().repaint();
 		ViewGames.model.fireTableDataChanged();
 	}
-	
+	/**
+	 * Swaps columns for search functionality.
+	 * @param index1
+	 * @param index2
+	 */
 	public static void swap(int index1, int index2) {
 		table.moveColumn(index1, index2);
 	}

@@ -1,18 +1,14 @@
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
+
 
 public class Sort {
 
@@ -24,6 +20,11 @@ public class Sort {
 	public static Object[][] sortedData;
 	public static ArrayList<VideoGame> games = new ArrayList<>();
 	
+	/**
+	 * Creates sort menu UI
+	 * @param jf
+	 * @param panel
+	 */
 	public static void createSortMenu(JFrame jf, JPanel panel) {
 		String[] options = {"Unsorted", "Alphabetically", "Developer", "Price Descending", "Price Ascending"};
 
@@ -63,7 +64,9 @@ public class Sort {
 			}
 		});
 	}
-
+	/**
+	 * Functionality for sorting by price ascending
+	 */
 	public static void sortPriceAscend() {
 		Main.parseVideoGames(sortedGamesPriceAs);
 		if(Filter.filtered == true) {
@@ -76,7 +79,9 @@ public class Sort {
 			sortTable(sortedGamesPriceAs,UI.jf);
 		}
 	}
-
+	/**
+	 * Functionality for sorting by price descending
+	 */
 	public static void sortPriceDescend() {
 		Main.parseVideoGames(sortedGamesPriceDe);
 		if(Filter.filtered == true) {
@@ -90,7 +95,9 @@ public class Sort {
 		}
 		
 	}
-
+	/**
+	 * Functionality for sorting alphabetically
+	 */
 	public static void sortAlphabet() {
 		Main.parseVideoGames(sortedGamesAlpha);
 		if(Filter.filtered == true) {
@@ -105,7 +112,9 @@ public class Sort {
 		sortTable(sortedGamesAlpha,UI.jf);
 		}
 	}
-	
+	/**
+	 * Functionality for sorting by developer
+	 */
 	public static void sortDeveloper() {
 		Main.parseVideoGames(sortedGamesDev);
 		if(Filter.filtered == true) {
@@ -120,7 +129,11 @@ public class Sort {
 		sortTable(sortedGamesDev,UI.jf);
 		}
 	}
-
+	/**
+	 * Functionality for sorting the table
+	 * @param games
+	 * @param jf
+	 */
 	public static void sortTable(ArrayList<VideoGame> games, JFrame jf) {
 		
 

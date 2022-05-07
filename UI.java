@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-
+//UI componenets are called here
 public class UI {
 	static JFrame jf = new JFrame("Video Game Catalog");
 	static ArrayList<VideoGame> games = new ArrayList<>();
@@ -11,14 +11,8 @@ public class UI {
 	public UI() {
 		
 		Main.parseVideoGames(games);
-
-		
 		jf.setLayout(new BorderLayout());
-
 		jf.setSize(1800,600);
-
-
-
 		jf.setResizable(false);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -33,17 +27,19 @@ public class UI {
 		AddEntry.createButton(jf, northPanel);
 		AddToFavorite.FavoriteButton(jf, northPanel);
 		
-		
-
-		//JPanel southPanel = new JPanel();
-		
 		jf.setVisible(true);
 	}
+	/**
+	 * Display full catalog
+	 */
 	public static void fullCatalog() {
 		Main.parseVideoGames(games);
 		ViewGames.viewGames(jf, games);
 		
 	}
+	/**
+	 * Display favorites catalog
+	 */
 	public static void favCatalog() {
 		Main.parseFavoriteGames(favorites);
 		ViewFavorites.viewFavorites(jf, favorites);

@@ -1,17 +1,13 @@
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -30,8 +26,11 @@ public class Log_In {
 	public static JButton fullCatalog = new JButton("Show Full Catalog");
 	public static JButton favorites = new JButton("Show Favorites");
 //=========================== Constructors
-
-	
+	/**
+	 * Creates login button
+	 * @param jf
+	 * @param panel
+	 */
 	public static void CreateLogInButton(JFrame jf, JPanel panel) {
 
 		inbutton.setSize(30, 100);
@@ -56,16 +55,16 @@ public class Log_In {
 		});
 		favorites.setSize(30, 100);
 		favorites.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				showFavorites();
-				
+
 			}
 		});
-		fullCatalog.setSize(30,100);
+		fullCatalog.setSize(30, 100);
 		fullCatalog.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				showFullCatalog();
@@ -80,7 +79,9 @@ public class Log_In {
 		panel.add(outbutton);
 
 	}
-
+	/**
+	 * Reads login information from UserAccounts.txt
+	 */
 	public static void LogIn() {
 		File file = new File("UserAccounts.txt");
 		UserAccount = new TreeMap<>();
@@ -113,7 +114,12 @@ public class Log_In {
 	}
 
 //=========================== Methods
-
+	/**
+	 * Checks for matching user and pass
+	 * @param account
+	 * @param password
+	 * @return
+	 */
 	public static boolean Login(String account, String password) {
 		LogIn();
 		if (UserAccount.containsKey(account) && UserAccount.get(account).equals(password)) {
@@ -121,16 +127,23 @@ public class Log_In {
 		}
 		return login;
 	}
-
+	
 	public boolean login() {
 		return login;
 	}
-
+	/**
+	 * Calls logged given account name. Also sets currentAccount string in AddToFavorites.
+	 * @param account
+	 */
 	public static void logged(String account) {
 		AddToFavorite.currentAccount(account);
 		logged(account, UI.jf);
 	}
-
+	/**
+	 * Sets UI to display logged in as.
+	 * @param account
+	 * @param jf
+	 */
 	public static void logged(String account, JFrame jf) {
 		if (login == true) {
 			log.setText("Logged in as: " + account);
@@ -140,19 +153,25 @@ public class Log_In {
 			favorites.setVisible(true);
 		}
 	}
-	
+	/**
+	 * Calls functions that display user favorites
+	 */
 	public static void showFavorites() {
 		favorites.setVisible(false);
 		fullCatalog.setVisible(true);
 		UI.favCatalog();
 	}
-	
+	/**
+	 * Calls functions that display the full catalog 
+	 */
 	public static void showFullCatalog() {
 		favorites.setVisible(true);
 		fullCatalog.setVisible(false);
 		UI.fullCatalog();
 	}
-	
+	/**
+	 * Logs the user out
+	 */
 	public static void logout() {
 		login = false;
 		log.setText("");
@@ -161,7 +180,10 @@ public class Log_In {
 		outbutton.setVisible(false);
 		favorites.setVisible(false);
 	}
-
+	/**
+	 * Returns user account.
+	 * @return
+	 */
 	public Map<String, String> map() {
 		return UserAccount;
 	}
@@ -169,7 +191,7 @@ public class Log_In {
 	// ask user, find security question based on user, print security question, have
 	// user input,
 	// check if input matches pass
-
+	
 	public static void securityQuestion(String account) {
 		LogIn();
 		if (UserSecurity.containsKey(account)) {
@@ -226,9 +248,8 @@ public class Log_In {
 		}
 		return false;
 	}
-	/**
-	 * @wbp.parser.entryPoint
-	 */
+
+	
 	public static void changePass(String user) {
 
 		JFrame frame = new JFrame("Enter new Password");
@@ -248,18 +269,16 @@ public class Log_In {
 		panel.add(passwordText);
 		JLabel passwordLabel = new JLabel("Confirm Password:");
 		passwordLabel.setBounds(10, 56, 150, 25);
-		passwordLabel.setSize(150,25);
+		passwordLabel.setSize(150, 25);
 		panel.add(passwordLabel);
 		JPasswordField passwordText2 = new JPasswordField(20);
 		passwordText2.setBounds(180, 56, 389, 25);
 		panel.add(passwordText2);
 
-		
-
 		JButton changePasswordButton = new JButton("Change Password");
 		changePasswordButton.setBounds(10, 106, 143, 25);
 		panel.add(changePasswordButton);
-		
+
 		JLabel errorMessage = new JLabel("");
 		errorMessage.setBounds(10, 142, 607, 14);
 		panel.add(errorMessage);
@@ -278,9 +297,9 @@ public class Log_In {
 				boolean specialCharacters = false;
 				boolean same = false;
 				if (pass1.equals(pass2)) {
-						same = true;
-						
-				}	
+					same = true;
+
+				}
 				if (match.find()) {
 					specialCharacters = true;
 				}
@@ -289,16 +308,16 @@ public class Log_In {
 				}
 
 				if ((pass1.length() >= 5) && (specialCharacters) && (digit) && (same)) {
-					Map<String,String[]> accounts = Main.getUserInfo();
+					Map<String, String[]> accounts = Main.getUserInfo();
 					String[] info = accounts.get(user);
 					info[1] = pass1;
-					accounts.put(user,info);
+					accounts.put(user, info);
 					Main.rewriteAccounts(accounts);
 					errorMessage.setText("Successfully Changed Password");
 					errorMessage.setForeground(Color.RED);
-				}
-				else {
-					errorMessage.setText("Password must be the same, have a number, special character, and have a length greater than 5");
+				} else {
+					errorMessage.setText(
+							"Password must be the same, have a number, special character, and have a length greater than 5");
 					errorMessage.setForeground(Color.RED);
 				}
 

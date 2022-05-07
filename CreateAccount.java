@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+//Creates an Account
 public class CreateAccount {
 	private static JTextField recoveryQuestionField;
 	private static JTextField recoveryAnswerField;
@@ -45,7 +46,8 @@ public class CreateAccount {
 	}
 
 	/**
-	 * @wbp.parser.entryPoint
+	 * Creates UI for creating an Account and the functionality for checking user input.
+	 * @param jf
 	 */
 	public static void createAccountUI(JFrame jf) {
 		frame = new JFrame("Create Account");

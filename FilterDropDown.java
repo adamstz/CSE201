@@ -2,25 +2,26 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Iterator;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-
+//UI and functionality for Filter Drop Down Menu
 public class FilterDropDown {
 	public static ArrayList<VideoGame> filteredGames = new ArrayList<>();
 	public static ArrayList<VideoGame> games = new ArrayList<>();
 	public static ArrayList<TableColumn> deletedColumns = new ArrayList<>();
 	public static ArrayList<VideoGame> temp;
+	/**
+	 * Creates filter Button
+	 * @param jf
+	 * @param panel
+	 */
 	public static void createFilterButton(JFrame jf, JPanel panel) {
 		JButton filterButton = new JButton("Filter");
 		filterButton.setSize(20, 20);
@@ -33,7 +34,10 @@ public class FilterDropDown {
 			}
 		});
 	}
-
+	/**
+	 * Creates filter Menu
+	 * @param jf
+	 */
 	public static void filterMenu(JFrame jf) {
 		String[] options = { "Developer", "Platform", "Price Range", "Unfilter" };
 		JFrame jFrame = new JFrame("Filter by:");
@@ -81,7 +85,10 @@ public class FilterDropDown {
 			}
 		});
 	}
-
+	/**
+	 * Functionality for Filtering by Developer
+	 * @param jf
+	 */
 	public static void byDeveloper(JFrame jf) {
 		JFrame questionBox = new JFrame("Enter developer name to filter by:");
 
@@ -106,13 +113,16 @@ public class FilterDropDown {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Main.parseVideoGames(games);
-				filteredGames = Filter.filterByDev(includeText.getText(), games);			
+				filteredGames = Filter.filterByDev(includeText.getText(), games);
 				filterTable(filteredGames, jf);
 
 			}
 		});
 	}
-
+	/**
+	 * Functionality for filtering by platform
+	 * @param jf
+	 */
 	public static void byPlatform(JFrame jf) {
 		JFrame questionBox = new JFrame("Enter platform name to filter by:");
 
@@ -140,13 +150,16 @@ public class FilterDropDown {
 
 				Main.parseVideoGames(games);
 				filteredGames = Filter.filterByPlatform(includeText.getText(), games);
-				
+
 				filterTable(filteredGames, jf);
 
 			}
 		});
 	}
-
+	/**
+	 * Functionality for filtering by price.
+	 * @param jf
+	 */
 	public static void byPriceRange(JFrame jf) {
 		JFrame questionBox = new JFrame("Enter price range:");
 
@@ -191,31 +204,34 @@ public class FilterDropDown {
 
 				Main.parseVideoGames(games);
 				filteredGames = Filter.filterByPrice(Integer.parseInt(lowText.getText()),
-				Integer.parseInt(highText.getText()), games);
-			
+						Integer.parseInt(highText.getText()), games);
+
 				filterTable(filteredGames, jf);
 
 			}
 		});
 	}
-
+	/**
+	 * Functionality for unfiltering the table
+	 * @param jf
+	 */
 	public static void unfilterTable(JFrame jf) {
-		if(Filter.filtered == false) {
+		if (Filter.filtered == false) {
 			return;
 		}
-		
+
 		Main.parseVideoGames(games);
-		for (int i = 0, k=1 ;i < ViewGames.model.getColumnCount() - 1; i++,k++) {
+		for (int i = 0, k = 1; i < ViewGames.model.getColumnCount() - 1; i++, k++) {
 			ViewGames.table.getColumnModel().getColumn(k).setHeaderValue(games.get(i).getName());
 			ViewGames.model.setValueAt(games.get(i).getDescription(), 0, k);
 			ViewGames.model.setValueAt(games.get(i).getPlatformString(), 1, k);
 			ViewGames.model.setValueAt(games.get(i).getDeveloper(), 2, k);
 			ViewGames.model.setValueAt(games.get(i).getPrice(), 3, k);
 		}
-		
-		for (int i = ViewGames.model.getColumnCount()-1, k = ViewGames.model.getColumnCount(); i < games.size(); i++, k++) {
-			
-			
+
+		for (int i = ViewGames.model.getColumnCount() - 1,
+				k = ViewGames.model.getColumnCount(); i < games.size(); i++, k++) {
+
 			ViewGames.model.addColumn(games.get(i).getName());
 			ViewGames.model.setValueAt(games.get(i).getDescription(), 0, k);
 			ViewGames.model.setValueAt(games.get(i).getPlatformString(), 1, k);
@@ -223,17 +239,17 @@ public class FilterDropDown {
 			ViewGames.model.setValueAt(games.get(i).getPrice(), 3, k);
 			ViewGames.model.setValueAt(Boolean.FALSE, 4, k);
 		}
-		
-		ViewGames.table.setAutoResizeMode( JTable.AUTO_RESIZE_OFF);
-		ViewGames.table.setFillsViewportHeight(true);	
+
+		ViewGames.table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		ViewGames.table.setFillsViewportHeight(true);
 		TableColumn column = null;
-		for (int i = 0; i < games.size()+1; i++) {
-		    column = ViewGames.table.getColumnModel().getColumn(i);
-		    column.setMinWidth(400); 
+		for (int i = 0; i < games.size() + 1; i++) {
+			column = ViewGames.table.getColumnModel().getColumn(i);
+			column.setMinWidth(400);
 		}
-		
+
 		DefaultTableCellRenderer center = new DefaultTableCellRenderer();
-		center.setHorizontalAlignment( JLabel.CENTER );
+		center.setHorizontalAlignment(JLabel.CENTER);
 		TableColumn column1 = ViewGames.table.getColumnModel().getColumn(0);
 		column1.setCellRenderer(center);
 		ViewGames.model.fireTableDataChanged();
@@ -241,7 +257,11 @@ public class FilterDropDown {
 		Filter.filtered = false;
 		jf.repaint();
 	}
-
+	/**
+	 * Functionality for filtering the Table.
+	 * @param games
+	 * @param jf
+	 */
 	public static void filterTable(ArrayList<VideoGame> games, JFrame jf) {
 		temp = new ArrayList<>();
 		for (VideoGame game : games) {
@@ -251,7 +271,7 @@ public class FilterDropDown {
 		Filter.filtered = true;
 		for (int i = 0, k = 1; i < temp.size(); i++, k++) {
 			ViewGames.table.getColumnModel().getColumn(k).setHeaderValue(temp.get(i).getName());
-			
+
 		}
 		for (int i = 0, k = 1; i < temp.size(); i++, k++) {
 			ViewGames.model.setValueAt(temp.get(i).getDescription(), 0, k);
@@ -260,19 +280,19 @@ public class FilterDropDown {
 			ViewGames.model.setValueAt(temp.get(i).getPrice(), 3, k);
 
 		}
-		
-		ViewGames.model.setColumnCount(temp.size()+1);
+
+		ViewGames.model.setColumnCount(temp.size() + 1);
 		ViewGames.model.fireTableStructureChanged();
-		ViewGames.table.setAutoResizeMode( JTable.AUTO_RESIZE_OFF);
-		ViewGames.table.setFillsViewportHeight(true);	
+		ViewGames.table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		ViewGames.table.setFillsViewportHeight(true);
 		TableColumn column = null;
-		for (int i = 0; i < temp.size()+1; i++) {
-		    column = ViewGames.table.getColumnModel().getColumn(i);
-		    column.setMinWidth(400); 
+		for (int i = 0; i < temp.size() + 1; i++) {
+			column = ViewGames.table.getColumnModel().getColumn(i);
+			column.setMinWidth(400);
 		}
 		ViewGames.table.getTableHeader().repaint();
 		ViewGames.model.fireTableDataChanged();
-		
+
 	}
 
 }
